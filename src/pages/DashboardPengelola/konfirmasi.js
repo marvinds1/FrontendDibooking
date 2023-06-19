@@ -9,7 +9,7 @@ function Konfirmasi({id}) {
     const [pesan, setPesan] = useState([]);
     const userId = id;
     const fetchPesan = async () => {
-        const response = await axios.get(`https://backend-dibooking.vercel.app/api/pemesanan/rekap/${userId}`);
+        const response = await axios.get(`http://localhost:8000/api/pemesanan/rekap/${userId}`);
         setPesan(response.data);
     };
     useEffect(() => {
@@ -17,7 +17,7 @@ function Konfirmasi({id}) {
     }, []);
 
     async function cancel(id) {
-        const response = await axios.put(`https://backend-dibooking.vercel.app/api/pemesanan/cancel/${id}`);
+        const response = await axios.put(`http://localhost:8000/api/pemesanan/cancel/${id}`);
         if (response) {
             alert("Pesanan berhasil dibatalkan");
             fetchPesan();
@@ -25,7 +25,7 @@ function Konfirmasi({id}) {
     };
 
     async function terima(id) {
-        const response = await axios.put(`https://backend-dibooking.vercel.app/api/pemesanan/terima/${id}`);
+        const response = await axios.put(`http://localhost:8000/api/pemesanan/terima/${id}`);
         if (response) {
             alert("Pesanan berhasil diterima");
             fetchPesan();

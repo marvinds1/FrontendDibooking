@@ -101,7 +101,7 @@ function Register() {
     const isValid = validateForm();
     if (isValid) {
       setLoading(true);
-      axios.post('https://backend-dibooking.vercel.app/api/user/register', data)
+      axios.post('http://localhost:8000/api/user/register', data)
         .then((response) => {
           setLoading(false);
           navigate('/login');

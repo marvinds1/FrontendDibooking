@@ -17,7 +17,7 @@ function History() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await axios.get("https://backend-dibooking.vercel.app/api/pemesanan/pesanans",
+      const response = await axios.get("http://localhost:8000/api/pemesanan/pesanans",
         {
           headers: {
             Authorization: `${loggedIn}`,

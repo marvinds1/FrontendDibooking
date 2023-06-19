@@ -43,7 +43,7 @@ function Dashboard() {
             navigate("/login");
             return;
         }
-        const response = await fetch("https://backend-dibooking.vercel.app/api/detail/profile", {
+        const response = await fetch("http://localhost:8000/api/detail/profile", {
           method: "GET",
           headers: {
             Authorization: `${token}`,

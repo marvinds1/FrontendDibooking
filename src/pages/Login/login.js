@@ -112,7 +112,7 @@ function Login() {
     }
 
     setLoading(true);
-    axios.post('https://backend-dibooking.vercel.app/api/user/login', form)
+    axios.post('http://localhost:8000/api/user/login', form)
       .then((response) => {
         setLoading(false);
         localStorage.setItem("token", response.data.token);

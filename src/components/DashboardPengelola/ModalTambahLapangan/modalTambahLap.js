@@ -34,7 +34,7 @@ function ModalTambahLap(props) {
 
     async function TambahLapangan() {
         console.log(form);
-        await axios.post("https://backend-dibooking.vercel.app/api/lapangan/add", form)
+        await axios.post("http://localhost:8000/api/lapangan/add", form)
         .then((response) => {
             console.log(response);
             alert("Lapangan berhasil ditambahkan");
