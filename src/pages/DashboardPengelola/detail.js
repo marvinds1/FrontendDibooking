@@ -21,7 +21,7 @@ function Detail() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await axios.get("http://localhost:8000/api/detail/profile", {
+      const response = await axios.get("https://backend-dibooking.vercel.app/api/detail/profile", {
         headers: {
           Authorization: loggedIn,
         },
@@ -47,7 +47,7 @@ function Detail() {
       nomor_ponsel: dataPenyewa.nomor_ponsel,
       lokasi: dataPenyewa.lokasi
     }
-    const response = await axios.put("http://localhost:8000/api/detail/update", data, {
+    const response = await axios.put("https://backend-dibooking.vercel.app/api/detail/update", data, {
       headers: {
         Authorization: `${loggedIn}`,
       },

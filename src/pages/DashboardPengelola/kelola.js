@@ -13,7 +13,7 @@ function Kelola() {
 
   useEffect(() => {
     async function fetchLapangan() {
-      const response = await axios.get("http://localhost:8000/api/lapangan/rekap", {
+      const response = await axios.get("https://backend-dibooking.vercel.app/api/lapangan/rekap", {
         headers: {
           Authorization: `${token}`,
         },

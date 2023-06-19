@@ -17,7 +17,7 @@ function ModalTambahRev(props) {
 
     async function TambahReview() {
         console.log(form);
-        await axios.post("http://localhost:8000/api/review/add", form)
+        await axios.post("https://backend-dibooking.vercel.app/api/review/add", form)
         .then((response) => {
             console.log(response);
             alert("Review berhasil ditambahkan");

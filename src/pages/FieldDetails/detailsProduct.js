@@ -43,7 +43,7 @@ function FieldDetails() {
   );
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8000/api/lapangan/${fieldId}`);
+      const response = await axios.get(`https://backend-dibooking.vercel.app/api/lapangan/${fieldId}`);
       const field = response.data.response.lapangan;
       const manager = response.data.response.manager;
       const rev = response.data.response.review;
@@ -92,7 +92,7 @@ function FieldDetails() {
   const handleClick = () => {
     setIsLoading(true);
     async function fetchData(userId, cost) {
-      const resp = await axios.post(`http://localhost:8000/api/pemesanan/add`, {
+      const resp = await axios.post(`https://backend-dibooking.vercel.app/api/pemesanan/add`, {
         idUser: userId,
         idField: fieldId,
         total: (2*field.price),
@@ -104,7 +104,7 @@ function FieldDetails() {
     async function cekLogin() {
       const loggedIn = localStorage.getItem("token");
       if (loggedIn) {
-        const response = await axios.get(`http://localhost:8000/api/user/profile`, {
+        const response = await axios.get(`https://backend-dibooking.vercel.app/api/user/profile`, {
           headers: {
             Authorization: `${loggedIn}`,
           },
