@@ -1,0 +1,77 @@
+.footer-dibooking {
+  outline: 1px solid #e5e5e5;
+  padding-bottom: 15px;
+}
+
+.dibooking-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.dibooking-footer-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 4rem;
+}
+
+.dibooking-footer-links_div {
+  width: 270px;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.dibooking-footer-links_div a {
+  font-size: 18px;
+  font-weight: 400;
+  color: #9a9a9a;
+  text-decoration: none;
+}
+
+.dibooking-footer-links_div a:hover {
+  color: #9a9a9a;
+  text-decoration: underline;
+}
+
+.dibooking-footer-links_div h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #000000;
+}
+
+.dibooking-footer-links_div h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #000000;
+}
+
+.dibooking-footer-links_div span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9a9a9a;
+  margin-bottom: 0.5rem;
+}
+
+.dibooking-footer-links_div p {
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  color: #9a9a9a;
+  margin-bottom: 0.5rem;
+}
+
+.dibooking-footer-below {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  justify-content: center;
+  color: #9a9a9a;
+}

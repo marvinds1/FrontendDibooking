@@ -1,0 +1,117 @@
+@media (max-width: 600px) {
+  .informations-account .mb-0 {
+    margin-bottom: 10px;
+  }
+
+  .informations-account .h3 {
+    font-size: 18px;
+  }
+
+  .informations-account .p {
+    font-size: 14px;
+  }
+
+  .informations-account .h2 {
+    font-size: 24px;
+  }
+
+  .mb-4,
+  .mt-4 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .informations {
+    align-items: center;
+  }
+
+  p {
+    margin-left: 0;
+  }
+
+  .informations p:first-child {
+    font-size: 18px;
+    line-height: 16px;
+  }
+
+  .informations p:nth-child(2) {
+    font-size: 12px;
+  }
+
+  .informations p:last-child {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  .informations-account .h3 {
+    font-size: 24px;
+  }
+
+  .informations-account .p {
+    font-size: 16px;
+  }
+
+  .informations-account .h2 {
+    font-size: 30px;
+  }
+
+  .informations p:first-child {
+    font-size: 24px;
+    line-height: 20px;
+  }
+
+  .informations p:nth-child(2) {
+    font-size: 14px;
+  }
+
+  .informations p:last-child {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .informations-account .h3 {
+    font-size: 30px;
+  }
+
+  .informations-account .p {
+    font-size: 18px;
+  }
+
+  .informations-account .h2 {
+    font-size: 36px;
+  }
+
+  .informations p:first-child {
+    font-size: 30px;
+    line-height: 24px;
+  }
+
+  .informations p:nth-child(2) {
+    font-size: 16px;
+  }
+
+  .informations p:last-child {
+    font-size: 16px;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
