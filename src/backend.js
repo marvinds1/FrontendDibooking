@@ -1,3 +1,3 @@
-const backendEndpoint = 'http://backend-dibooking.vercel.app';
+const backendEndpoint = 'https://backend-dibooking.vercel.app';
 
 export { backendEndpoint };
