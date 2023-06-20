@@ -9,6 +9,7 @@ import { CiCircleAlert } from "react-icons/ci";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
+import { backendEndpoint } from '../../backend';
 
 
 function PaymentDetails() {
@@ -36,7 +37,7 @@ function PaymentDetails() {
   });
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`https://backend-dibooking.vercel.app/api/pemesanan/confirmation/${bookingId}`);
+      const response = await axios.get(`${backendEndpoint}/api/pemesanan/confirmation/${bookingId}`);
       setBooking(response.data);
       if (response.data.pesanan.status !== "Menunggu Pembayaran") {
         navigate(`/`);
@@ -115,7 +116,7 @@ function PaymentDetails() {
 
   async function handlePayment() {
     setIsLoading(true);
-    await axios.put(`https://backend-dibooking.vercel.app/api/pemesanan/confirmation/${bookingId}`);
+    await axios.put(`${backendEndpoint}/api/pemesanan/confirmation/${bookingId}`);
     setIsLoading(false);
     navigate("/", alert("Pembayaran berhasil dilakukan."));
   }

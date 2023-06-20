@@ -65,15 +65,17 @@ function About() {
               <div>
                 <h1 className="mb-3" style={{ fontWeight: '700' }}>Selamat datang di <span style={{ fontWeight: '700', color: '#ff7315' }}>Dibooking</span></h1>
                 <p className="mb-4">Dibooking merupakan Website untuk mempermudah dalam  Pemesanan serta Pengelolaan Lapangan Olahraga di Kota Semarang</p>
-                <Button style={isFillButtonHovered ? buttonFillHover : buttonFill}
-                  className="me-4"
-                  onMouseEnter={() => setFillButtonHovered(true)}
-                  onMouseLeave={() => setFillButtonHovered(false)}
-                >Booking Sekarang</Button>
-                <Button style={isOutlineButtonHovered ? buttonOutlineHover : buttonOutline}
-                  onMouseEnter={() => setOutlineButtonHovered(true)}
-                  onMouseLeave={() => setOutlineButtonHovered(false)}
-                >Daftar Sekarang</Button>
+                <div style={{ display: "flex" }}>
+                  <Button href="/" style={{...(isFillButtonHovered ? buttonFillHover : buttonFill),display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center"}}
+                    className="me-4"
+                    onMouseEnter={() => setFillButtonHovered(true)}
+                    onMouseLeave={() => setFillButtonHovered(false)}
+                  >Booking Sekarang</Button>
+                  <Button href="/login" style={{...(isOutlineButtonHovered ? buttonOutlineHover : buttonOutline),display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center"}}
+                    onMouseEnter={() => setOutlineButtonHovered(true)}
+                    onMouseLeave={() => setOutlineButtonHovered(false)}
+                  >Daftar Sekarang</Button>
+                </div>
               </div>
             </div>
           </Col>

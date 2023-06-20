@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-// import { pesan } from '../../data/dataPemesanan';
 import "../../pages/DashboardPengelola/dashboard.css";
 import axios from 'axios';
+import { backendEndpoint } from '../../backend';
 
 
 function Konfirmasi({id}) {
     const [pesan, setPesan] = useState([]);
     const userId = id;
     const fetchPesan = async () => {
-        const response = await axios.get(`https://backend-dibooking.vercel.app/api/pemesanan/rekap/${userId}`);
+        const response = await axios.get(`${backendEndpoint}/api/pemesanan/rekap/${userId}`);
         setPesan(response.data);
     };
     useEffect(() => {
@@ -17,7 +17,7 @@ function Konfirmasi({id}) {
     }, []);
 
     async function cancel(id) {
-        const response = await axios.put(`https://backend-dibooking.vercel.app/api/pemesanan/cancel/${id}`);
+        const response = await axios.put(`${backendEndpoint}/api/pemesanan/cancel/${id}`);
         if (response) {
             alert("Pesanan berhasil dibatalkan");
             fetchPesan();
@@ -25,7 +25,7 @@ function Konfirmasi({id}) {
     };
 
     async function terima(id) {
-        const response = await axios.put(`https://backend-dibooking.vercel.app/api/pemesanan/terima/${id}`);
+        const response = await axios.put(`${backendEndpoint}/api/pemesanan/terima/${id}`);
         if (response) {
             alert("Pesanan berhasil diterima");
             fetchPesan();
@@ -37,7 +37,6 @@ function Konfirmasi({id}) {
 
     return (
             <div className="container-fluid">
-                {/* <!-- Page Heading --> */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 className="h3 mb-0 text-gray-800">Konfirmasi Pemesanan</h1>
                 </div>
@@ -59,7 +58,7 @@ function Konfirmasi({id}) {
                                 <td>{item.title}</td>
                                 <td>{item.nama}</td>
                                 <td>{item.tanggal}</td>
-                                <td>{item.waktu}</td>
+                                <td>{item.jam}</td>
                                 <td>
                                     <button onClick={() => terima(item.idPesanan)} className="btn btn-sm text-white button-terima">Terima</button> | <button onClick={() => cancel(item.idPesanan)} className="btn btn-sm text-white button-tolak">Tolak</button>
                                 </td>

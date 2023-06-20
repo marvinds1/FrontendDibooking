@@ -8,7 +8,7 @@ import DCarousel from "../../components/Carousel/carousel";
 import Footer from "../../components/Footer/footer";
 import './home.css';
 import DNavbar from "../../components/Navbar/navbar";
-// import { carouselItems, images, products } from "./dummy";
+import { backendEndpoint } from "../../backend";
 import { images } from "./dummy";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -20,7 +20,8 @@ function HomePage() {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("https://backend-dibooking.vercel.app/api/lapangan");
+      console.log("backendEndpoint: ", backendEndpoint);
+      const response = await axios.get(`${backendEndpoint}/api/lapangan`);
       const fields = response.data;
       fields.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
       const Items = fields.map((product) => ({

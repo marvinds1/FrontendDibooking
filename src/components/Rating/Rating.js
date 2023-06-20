@@ -24,9 +24,6 @@ const Rating = ({reviews, rating5, rating4, rating3, rating2, rating1, rating0})
     },
   ];
 
-  // const comments = reviews.comment;
-  // const rating = ratings;
-
   const buttons = [
     { title: "Semua", selected: true },
     { title: `5 Bintang (${rating5})` },

@@ -6,6 +6,7 @@ import TextInputWithFloatLabel from '../../components/TextInputWithFloatLabel/Te
 import Footer from "../../components/Footer/footer";
 import axios from "axios";
 import locations from "../../components/Lokasi/data";
+import { backendEndpoint } from "../../backend";
 
 function AccountDetails() {
   const [dataPenyewa, setDataPenyewa] = useState({
@@ -22,7 +23,7 @@ function AccountDetails() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await axios.get("https://backend-dibooking.vercel.app/api/detail/profile", {
+      const response = await axios.get(`${backendEndpoint}/api/detail/profile`, {
         headers: {
           Authorization: loggedIn,
         },
@@ -46,7 +47,7 @@ function AccountDetails() {
       nomor_ponsel: dataPenyewa.nomor_ponsel,
       lokasi: dataPenyewa.lokasi
     }
-    const response = await axios.put("https://backend-dibooking.vercel.app/api/detail/update", data, {
+    const response = await axios.put(`${backendEndpoint}/api/detail/update`, data, {
       headers: {
         Authorization: `${loggedIn}`,
       },

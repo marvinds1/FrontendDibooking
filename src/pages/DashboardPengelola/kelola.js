@@ -3,6 +3,7 @@ import MyVerticallyCenteredModal from "../../components/DashboardPengelola/Modal
 import ModalTambahLap from "../../components/DashboardPengelola/ModalTambahLapangan/modalTambahLap";
 import "../../pages/DashboardPengelola/dashboard.css";
 import axios from "axios";
+import { backendEndpoint } from "../../backend";
 
 function Kelola() {
   const token = localStorage.getItem("token");
@@ -13,11 +14,12 @@ function Kelola() {
 
   useEffect(() => {
     async function fetchLapangan() {
-      const response = await axios.get("https://backend-dibooking.vercel.app/api/lapangan/rekap", {
+      const response = await axios.get(`${backendEndpoint}/api/lapangan/rekap`, {
         headers: {
           Authorization: `${token}`,
         },
       });
+      console.log(response.data);
       setData(response.data);
     }
     fetchLapangan();
@@ -69,12 +71,12 @@ function Kelola() {
                   <td>{item.location}</td>
                   <td>{item.price}</td>
                   <td>
-                    <button
-                      className="btn btn-sm text-white button-detail"
+                    <button 
                       onClick={() => {
                         setModalShow(true);
                         setId(item.id);
                       }}
+                      className="btn btn-sm text-white button-detail"
                     >
                       Detail
                     </button>

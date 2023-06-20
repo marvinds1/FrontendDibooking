@@ -5,6 +5,7 @@ import { Navbar, Nav, Container, NavDropdown, Button, Image } from 'react-bootst
 import logo from '../../assets/icons/logo.png';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { backendEndpoint } from '../../backend';
 
 function DNavbar() {
   const images = require('../../assets/images/profile.jpeg')
@@ -54,7 +55,7 @@ function DNavbar() {
   });
 
   const fetchUser = async (token) => {
-    const response = await fetch("https://backend-dibooking.vercel.app/api/detail/profile", {
+    const response = await fetch(`${backendEndpoint}/api/detail/profile`, {
       method: "GET",
       headers: {
         Authorization: `${token}`,

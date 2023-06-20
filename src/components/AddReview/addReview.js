@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import { backendEndpoint } from '../../backend';
 
 function ModalTambahRev(props) {
     const [form, setForm] = React.useState({
@@ -17,7 +18,7 @@ function ModalTambahRev(props) {
 
     async function TambahReview() {
         console.log(form);
-        await axios.post("https://backend-dibooking.vercel.app/api/review/add", form)
+        await axios.post(`${backendEndpoint}/api/review/add`, form)
         .then((response) => {
             console.log(response);
             alert("Review berhasil ditambahkan");

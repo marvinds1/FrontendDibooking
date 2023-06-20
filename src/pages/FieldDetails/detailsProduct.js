@@ -17,6 +17,7 @@ import online from "../../assets/icons/online.png";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { backendEndpoint } from "../../backend";
 
 function FieldDetails() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ function FieldDetails() {
   );
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`https://backend-dibooking.vercel.app/api/lapangan/${fieldId}`);
+      const response = await axios.get(`${backendEndpoint}/api/lapangan/${fieldId}`);
       const field = response.data.response.lapangan;
       const manager = response.data.response.manager;
       const rev = response.data.response.review;
@@ -92,7 +93,7 @@ function FieldDetails() {
   const handleClick = () => {
     setIsLoading(true);
     async function fetchData(userId, cost) {
-      const resp = await axios.post(`https://backend-dibooking.vercel.app/api/pemesanan/add`, {
+      const resp = await axios.post(`${backendEndpoint}/api/pemesanan/add`, {
         idUser: userId,
         idField: fieldId,
         total: (2*field.price),
@@ -104,7 +105,7 @@ function FieldDetails() {
     async function cekLogin() {
       const loggedIn = localStorage.getItem("token");
       if (loggedIn) {
-        const response = await axios.get(`https://backend-dibooking.vercel.app/api/user/profile`, {
+        const response = await axios.get(`${backendEndpoint}/api/user/profile`, {
           headers: {
             Authorization: `${loggedIn}`,
           },

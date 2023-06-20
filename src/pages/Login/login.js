@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Col, Card, Image, Form, FloatingLabel, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import TextInputWithFloatLabel from '../../components/TextInputWithFloatLabel/Te
 import DAlert from '../../components/Alert';
 import logo from '../../assets/icons/logo.png';
 import ilustrations from '../../assets/images/ilustrations.png';
+import { backendEndpoint } from '../../backend';
 
 function Login() {
   const navigate = useNavigate();
@@ -17,19 +18,19 @@ function Login() {
     }
   });
 
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
     daftar_sebagai: "",
   });
 
-  const [alert, setAlert] = React.useState({
+  const [alert, setAlert] = useState({
     status: false,
     message: "",
     type: "",
   });
 
-  const [isFillButtonHovered, setFillButtonHovered] = React.useState(false);
+  const [isFillButtonHovered, setFillButtonHovered] = useState(false);
   const [isOutlineButtonHovered, setOutlineButtonHovered] = useState(false);
 
   const buttonFill = {
@@ -75,7 +76,7 @@ function Login() {
     boxShadow: '3px 3px 2px rgba(0, 0, 0, 0.2)'
   };
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({
@@ -112,7 +113,7 @@ function Login() {
     }
 
     setLoading(true);
-    axios.post('https://backend-dibooking.vercel.app/api/user/login', form)
+    axios.post(`${backendEndpoint}/api/user/login`, form)
       .then((response) => {
         setLoading(false);
         localStorage.setItem("token", response.data.token);
@@ -140,7 +141,9 @@ function Login() {
         <Col lg="6" className="d-flex align-items-center">
           <Card.Body>
             <div className="text-center mt-5">
-              <Image src={logo} alt="logo" style={{ width: "117px", height: "74px", objectFit: "cover", marginLeft: "45px" }}></Image>
+              <a href='/'>
+                <Image src={logo} alt="logo" style={{ width: "117px", height: "74px", objectFit: "cover", marginLeft: "45px" }}></Image>
+              </a>
               <Card.Title className="mt-1 mb-2">Masuk</Card.Title>
               <Card.Text>Silahkan masuk untuk lanjut ke website kami</Card.Text>
             </div>

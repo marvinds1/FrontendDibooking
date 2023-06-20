@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import locations from '../../Lokasi/data';
 import axios from 'axios';
+import { backendEndpoint } from '../../../backend';
 
 function ModalTambahLap(props) {
     const [form, setForm] = React.useState({
@@ -34,7 +35,7 @@ function ModalTambahLap(props) {
 
     async function TambahLapangan() {
         console.log(form);
-        await axios.post("https://backend-dibooking.vercel.app/api/lapangan/add", form)
+        await axios.post(`${backendEndpoint}/api/lapangan/add`, form)
         .then((response) => {
             console.log(response);
             alert("Lapangan berhasil ditambahkan");
@@ -48,7 +49,6 @@ function ModalTambahLap(props) {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         TambahLapangan();
-        // console.log(form);
         props.onHide();
     };
 
@@ -174,7 +174,6 @@ function ModalTambahLap(props) {
           </Modal>
         </React.Fragment>
       );
-      
 }
 
 export default ModalTambahLap

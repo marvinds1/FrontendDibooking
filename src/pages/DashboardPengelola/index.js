@@ -6,6 +6,7 @@ import Navbar from '../../components/DashboardPengelola/navbar';
 import Footer from '../../components/DashboardPengelola/footer';
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { backendEndpoint } from "../../backend";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ function Dashboard() {
             navigate("/login");
             return;
         }
-        const response = await fetch("https://backend-dibooking.vercel.app/api/detail/profile", {
+        const response = await fetch(`${backendEndpoint}/api/detail/profile`, {
           method: "GET",
           headers: {
             Authorization: `${token}`,

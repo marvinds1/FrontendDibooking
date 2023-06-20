@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ModalTambahRev from "../../components/AddReview/addReview";
+import { backendEndpoint } from "../../backend";
 
 function History() {
   const [modalRev, setModalRev] = useState(false);
@@ -17,7 +18,7 @@ function History() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await axios.get("https://backend-dibooking.vercel.app/api/pemesanan/pesanans",
+      const response = await axios.get(`${backendEndpoint}/api/pemesanan/pesanans`,
         {
           headers: {
             Authorization: `${loggedIn}`,

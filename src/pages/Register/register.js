@@ -7,6 +7,7 @@ import TextInputWithFloatLabel from '../../components/TextInputWithFloatLabel/Te
 import DAlert from '../../components/Alert';
 import logo from '../../assets/icons/logo.png';
 import ilustrations from '../../assets/images/ilustrations.png';
+import { backendEndpoint } from '../../backend';
 
 function Register() {
   const navigate = useNavigate();
@@ -101,7 +102,7 @@ function Register() {
     const isValid = validateForm();
     if (isValid) {
       setLoading(true);
-      axios.post('https://backend-dibooking.vercel.app/api/user/register', data)
+      axios.post(`${backendEndpoint}/api/user/register`, data)
         .then((response) => {
           setLoading(false);
           navigate('/login');
@@ -168,7 +169,9 @@ function Register() {
         <Col lg="6" className="d-flex align-items-center">
           <Card.Body>
             <div className="text-center mt-5">
-              <Image src={logo} alt="logo" style={{ width: "117px", height: "74px", objectFit: "cover", marginLeft: "45px" }}></Image>
+              <a href='/'>
+                <Image src={logo} alt="logo" style={{ width: "117px", height: "74px", objectFit: "cover", marginLeft: "45px" }}></Image>
+              </a>
               <Card.Title className="mt-1 mb-2">Daftar</Card.Title>
               <Card.Text>Silahkan daftar akun terlebih dahulu</Card.Text>
             </div>
