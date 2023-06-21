@@ -69,15 +69,12 @@ function MyVerticallyCenteredModal(props) {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     console.log(item);
-    axios.put(`${backendEndpoint}/api/lapangan/update/${props.id}`, item)
-    .then((response) => {
-      console.log(response);
+    const response = axios.put(`${backendEndpoint}/api/lapangan/update/${props.id}`, item);
+    if (response){
       alert("Lapangan berhasil diubah");
-    })
-    .catch((error) => {
-      console.log(error);
+    } else {
       alert("Lapangan gagal diubah");
-    });
+    }
     window.location.reload();
   };
 
@@ -104,17 +101,26 @@ function MyVerticallyCenteredModal(props) {
                 <Form.Label>Kategori</Form.Label>
                 <Form.Select className='mb-3' aria-label="Default select example" onChange={handleInputChange2}>
                   <option>{item.kategori}</option>
-                  <option value="1">Sepak Bola</option>
-                  <option value="2">Futsal</option>
-                  <option value="3">Bulu Tangkis</option>
-                  <option value="4">Basket</option>
-                  <option value="5">Voli</option>
-                  <option value="6">Billiard</option>
+                  <option value="Sepak Bola">Sepak Bola</option>
+                  <option value="Futsal">Futsal</option>
+                  <option value="Bulu Tangkis">Bulu Tangkis</option>
+                  <option value="Basket">Basket</option>
+                  <option value="Voli">Voli</option>
+                  <option value="Billiard">Billiard</option>
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                 <Form.Label>Lokasi</Form.Label>
-                <Form.Control type="text" placeholder="Lokasi Lapangan" value={item.lokasi} onChange={handleInputChange3} />
+                <Form.Select type="text" placeholder="Lokasi Lapangan" value={item.lokasi} onChange={handleInputChange3}>
+                  <option>{item.lokasi}</option>
+                  <option value="Kota Semarang">Kota Semarang</option>
+                  <option value="Semarang Barat">Semarang Barat</option>
+                  <option value="Semarang Timur">Semarang Timur</option>
+                  <option value="Semarang Selatan">Semarang Selatan</option>
+                  <option value="Semarang Utara">Semarang Utara</option>
+                  <option value="Tembalang">Tembalang</option>
+                  <option value="Tugu">Tugu</option>
+                </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                 <Form.Label>Harga</Form.Label>

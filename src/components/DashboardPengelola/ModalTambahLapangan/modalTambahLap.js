@@ -115,21 +115,45 @@ function ModalTambahLap(props) {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                   <Form.Label>Fasilitas</Form.Label>
-                  <Form.Label>note: harap mengisikan dengan format angka</Form.Label>
-                  <Form.Label>2 untuk Kamar Mandi, </Form.Label>
-                  <Form.Label>3 untuk Musholla, </Form.Label>
-                  <Form.Label>5 untuk Kantin, </Form.Label>
-                  <Form.Label>7 untuk Parkir, </Form.Label>
-                  <Form.Label>11 untuk Gratis 2 Botol Minuman, </Form.Label>
-                  <Form.Label>dan kombinasi perkalian untuk memunculkan lebih dari satu fasilitas, contoh 6 untuk fasilitas 2 dan 3</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
+                  <Form.Select
                     name="facilities"
                     value={form.facilities}
                     onChange={handleInputChange}
                     placeholder="Fasilitas lapangan"
-                  />
+                  >
+                    <option value="">Pilih fasilitas lapangan</option>
+                    <option value="2">1. Kamar Mandi</option>
+                    <option value="3">2. Musholla</option>
+                    <option value="5">3. Kantin</option>
+                    <option value="7">4. Parkir</option>
+                    <option value="11">5. Gratis 2 Botol Minum 1,5 Liter</option>
+                    <option value="6">Fasilitas 1 dan 2</option>
+                    <option value="10">Fasilitas 1 dan 3</option>
+                    <option value="14">Fasilitas 1 dan 4</option>
+                    <option value="22">Fasilitas 1 dan 5</option>
+                    <option value="15">Fasilitas 2 dan 3</option>
+                    <option value="21">Fasilitas 2 dan 4</option>
+                    <option value="33">Fasilitas 2 dan 5</option>
+                    <option value="35">Fasilitas 3 dan 4</option>
+                    <option value="55">Fasilitas 3 dan 5</option>
+                    <option value="77">Fasilitas 4 dan 5</option>
+                    <option value="30">Fasilitas 1, 2, dan 3</option>
+                    <option value="42">Fasilitas 1, 2, dan 4</option>
+                    <option value="66">Fasilitas 1, 2, dan 5</option>
+                    <option value="70">Fasilitas 1, 3, dan 4</option>
+                    <option value="110">Fasilitas 1, 3, dan 5</option>
+                    <option value="154">Fasilitas 1, 4, dan 5</option>
+                    <option value="105">Fasilitas 2, 3, dan 4</option>
+                    <option value="165">Fasilitas 2, 3, dan 5</option>
+                    <option value="231">Fasilitas 2, 4, dan 5</option>
+                    <option value="385">Fasilitas 3, 4, dan 5</option>
+                    <option value="330">Fasilitas 1, 2, 3, dan 4</option>
+                    <option value="462">Fasilitas 1, 2, 3, dan 5</option>
+                    <option value="770">Fasilitas 1, 2, 4, dan 5</option>
+                    <option value="1155">Fasilitas 1, 3, 4, dan 5</option>
+                    <option value="1155">Fasilitas 2, 3, 4, dan 5</option>
+                    <option value="2310">Fasilitas 1, 2, 3, 4, dan 5</option>
+                  </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Label>Alamat</Form.Label>

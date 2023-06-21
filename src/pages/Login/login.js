@@ -137,7 +137,7 @@ function Login() {
 
   return (
     <div className="h-100">
-      <Row className="g-0" style={{ height: "100%" }}>
+      <Row className="g-0" style={{ height: "100vh" }}>
         <Col lg="6" className="d-flex align-items-center">
           <Card.Body>
             <div className="text-center mt-5">

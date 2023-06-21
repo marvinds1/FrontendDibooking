@@ -71,7 +71,7 @@ function Dashboard() {
 
     return (
         <>
-        <div id='wrapper'>
+        <div id='wrapper' style={{ height: "100vh" }}>
             <div className="Sidebar">
                 <ul className={style} id="accordionSidebar">
                     <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
