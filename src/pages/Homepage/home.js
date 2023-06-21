@@ -20,7 +20,6 @@ function HomePage() {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      console.log("backendEndpoint: ", backendEndpoint);
       const response = await axios.get(`${backendEndpoint}/api/lapangan`);
       const fields = response.data;
       fields.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
@@ -36,7 +35,7 @@ function HomePage() {
         imageSrc: require('../../assets/images/lapangan.jpeg'),
       }));
       setAllProducts(Items);
-      const recommendations = Items.filter((product) => product.rating > 4);
+      const recommendations = Items.slice(0, 10);
       setCarouselItems(recommendations)
       setProducts(Items.slice(0, 8));
     }
@@ -52,7 +51,6 @@ function HomePage() {
   function filterField(type) {
     const temp = allProducts.filter((product) => product.typeField === type);
     setProducts(temp.slice(0,8));
-
   }
 
   function filterLocation(type){

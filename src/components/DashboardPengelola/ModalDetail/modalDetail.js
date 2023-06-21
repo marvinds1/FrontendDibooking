@@ -121,7 +121,7 @@ function MyVerticallyCenteredModal(props) {
                 <Form.Control type="text" placeholder="Harga Lapangan" value={item.harga} onChange={handleInputChange4} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="textAreaFasilitas">
-                <Form.Label>Fasilitas Lainnya</Form.Label>
+                <Form.Label>Deskripsi Lapangan</Form.Label>
                 <Form.Control as="textarea" rows={3} value={item.deskripsi} onChange={handleInputChange5} />
               </Form.Group>
             </Form>

@@ -115,6 +115,13 @@ function ModalTambahLap(props) {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                   <Form.Label>Fasilitas</Form.Label>
+                  <Form.Label>note: harap mengisikan dengan format angka</Form.Label>
+                  <Form.Label>2 untuk Kamar Mandi, </Form.Label>
+                  <Form.Label>3 untuk Musholla, </Form.Label>
+                  <Form.Label>5 untuk Kantin, </Form.Label>
+                  <Form.Label>7 untuk Parkir, </Form.Label>
+                  <Form.Label>11 untuk Gratis 2 Botol Minuman, </Form.Label>
+                  <Form.Label>dan kombinasi perkalian untuk memunculkan lebih dari satu fasilitas, contoh 6 untuk fasilitas 2 dan 3</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
