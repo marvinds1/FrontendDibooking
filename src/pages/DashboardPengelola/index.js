@@ -6,7 +6,7 @@ import Navbar from '../../components/DashboardPengelola/navbar';
 import Footer from '../../components/DashboardPengelola/footer';
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { backendEndpoint } from "../../backend";
+import api from '../../api';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -44,13 +44,7 @@ function Dashboard() {
             navigate("/login");
             return;
         }
-        const response = await fetch(`${backendEndpoint}/api/detail/profile`, {
-          method: "GET",
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-        const data = await response.json();
+        const { data } = await api.get(`/api/detail/profile`);
         if (data.token.status === 'Pemilik Lapangan') {
             setUser({
                 id: data.token.id,

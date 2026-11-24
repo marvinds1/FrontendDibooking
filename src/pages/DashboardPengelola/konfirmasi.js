@@ -1,15 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import "../../pages/DashboardPengelola/dashboard.css";
-import axios from 'axios';
-import { backendEndpoint } from '../../backend';
+import api, { errorMessage } from '../../api';
 
 
 function Konfirmasi({id}) {
     const [pesan, setPesan] = useState([]);
-    const userId = id;
     const fetchPesan = async () => {
-        const response = await axios.get(`${backendEndpoint}/api/pemesanan/rekap/${userId}`);
+        const response = await api.get(`/api/pemesanan/rekap`);
         setPesan(response.data);
     };
     useEffect(() => {
@@ -17,22 +15,23 @@ function Konfirmasi({id}) {
     }, []);
 
     async function cancel(id) {
-        const response = await axios.put(`${backendEndpoint}/api/pemesanan/cancel/${id}`);
-        if (response) {
+        try {
+            await api.put(`/api/pemesanan/cancel/${id}`);
             alert("Pesanan berhasil dibatalkan");
-            fetchPesan();
+        } catch (error) {
+            alert(errorMessage(error, "Pesanan gagal dibatalkan"));
         }
+        fetchPesan();
     };
 
     async function terima(id) {
-        const response = await axios.put(`${backendEndpoint}/api/pemesanan/terima/${id}`);
-        if (response) {
+        try {
+            await api.put(`/api/pemesanan/terima/${id}`);
             alert("Pesanan berhasil diterima");
-            fetchPesan();
+        } catch (error) {
+            alert(errorMessage(error, "Pesanan gagal diterima"));
         }
-        else {
-            alert("Pesanan gagal diterima");
-        }
+        fetchPesan();
     };
 
     return (

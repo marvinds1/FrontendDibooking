@@ -15,9 +15,8 @@ import detail from "../../assets/images/detail-lapangan.png";
 import iconProfile from "../../assets/icons/ic_profile.png";
 import online from "../../assets/icons/online.png";
 import { useParams } from 'react-router-dom';
-import axios from "axios";
+import api, { errorMessage } from '../../api';
 import { useNavigate } from "react-router-dom";
-import { backendEndpoint } from "../../backend";
 
 function FieldDetails() {
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ function FieldDetails() {
   );
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`${backendEndpoint}/api/lapangan/${fieldId}`);
+      const response = await api.get(`/api/lapangan/${fieldId}`);
       const field = response.data.response.lapangan;
       const manager = response.data.response.manager;
       const rev = response.data.response.review;
@@ -93,19 +92,23 @@ function FieldDetails() {
   const handleClick = () => {
     setIsLoading(true);
     async function fetchData(userId, cost) {
-      const resp = await axios.post(`${backendEndpoint}/api/pemesanan/add`, {
-        idUser: userId,
-        idField: fieldId,
-        total: (2*field.price),
-        tanggal: tanggal,
-        jam: jam,
-      });
-      navigate(`/payment/${resp.data.idPesanan}`);
+      try {
+        const resp = await api.post(`/api/pemesanan/add`, {
+          idField: Number(fieldId),
+          tanggal: tanggal,
+          jam: jam,
+        });
+        navigate(`/payment/${resp.data.idPesanan}`);
+      } catch (error) {
+        alert(errorMessage(error, "Pemesanan gagal, silakan coba lagi."));
+      } finally {
+        setIsLoading(false);
+      }
     }
     async function cekLogin() {
       const loggedIn = localStorage.getItem("token");
       if (loggedIn) {
-        const response = await axios.get(`${backendEndpoint}/api/user/profile`, {
+        const response = await api.get(`/api/user/profile`, {
           headers: {
             Authorization: `${loggedIn}`,
           },
@@ -113,9 +116,6 @@ function FieldDetails() {
         const userId = response.data.token.id;
         const cost = response.data.token.saldo;
         fetchData(userId, cost);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
       }
       else {
         alert("Anda harus login terlebih dahulu!");

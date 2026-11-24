@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Card, Image, Form, FloatingLabel, Button, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import TextInputWithFloatLabel from '../../components/TextInputWithFloatLabel/TextInputWithFloatLabel';
 import DAlert from '../../components/Alert';
 import logo from '../../assets/icons/logo.png';
 import ilustrations from '../../assets/images/ilustrations.png';
-import { backendEndpoint } from '../../backend';
 
 function Login() {
   const navigate = useNavigate();
@@ -113,7 +112,7 @@ function Login() {
     }
 
     setLoading(true);
-    axios.post(`${backendEndpoint}/api/user/login`, form)
+    api.post(`/api/user/login`, form)
       .then((response) => {
         setLoading(false);
         localStorage.setItem("token", response.data.token);

@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# FrontendDibooking
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React client for **Dibooking**, a sports-field booking app. Renters browse fields, pick a 2-hour slot, pay from their in-app balance and leave reviews; field owners get a dashboard to manage fields and confirm bookings. API: [backend-dibooking](https://github.com/marvinds1/backend-dibooking).
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+React 18 (Create React App), React Router 6, React Bootstrap, Axios. Owner dashboard is based on the SB Admin 2 template.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Field catalogue, detail page, rating breakdown and reviews
+- Slot picker (next 4 days, 2-hour slots within opening hours) → booking → payment confirmation
+- Booking list and history (active vs. finished/cancelled)
+- Owner dashboard: add/edit fields, accept or reject paid bookings
+- Profile page with editable contact data
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How the client talks to the API
 
-### `npm test`
+All requests go through one Axios instance (`src/api.js`):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `baseURL` from `REACT_APP_API_URL` (falls back to the deployed backend).
+- Adds `Authorization: Bearer <access token>` to every request.
+- On `401` it refreshes the access token **once** via the httpOnly refresh cookie and retries the request. Concurrent `401`s share a single in-flight refresh promise — firing several refreshes in parallel would trip the backend's refresh-token reuse detection and log the user out.
+- `errorMessage()` surfaces the server's message (e.g. *"Slot sudah dibooking"*, *"Saldo tidak mencukupi"*) instead of a generic failure.
 
-### `npm run build`
+## Safety notes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The price and user ID are **not** sent when booking; the server derives them from the token and the field's price.
+- Pay / book buttons stay disabled while a request is in flight (no artificial delays that briefly re-enable them), so double clicks don't produce duplicate requests. The backend is idempotent anyway.
+- No `console.log` of form data (the register form used to log the password).
+- The access token is short-lived but stored in `localStorage`, which is readable by any script on the page. Keep dependencies updated and avoid `dangerouslySetInnerHTML` with user content; a stricter setup would keep the access token in memory only.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Running locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+cp .env.example .env      # point REACT_APP_API_URL to your backend
+npm ci
+npm start                 # http://localhost:3000
+CI=true npm run build     # production build, warnings fail the build
+```

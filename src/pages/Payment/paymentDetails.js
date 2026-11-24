@@ -8,8 +8,7 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import { CiCircleAlert } from "react-icons/ci";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from "axios";
-import { backendEndpoint } from '../../backend';
+import api, { errorMessage } from '../../api';
 
 
 function PaymentDetails() {
@@ -37,7 +36,7 @@ function PaymentDetails() {
   });
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`${backendEndpoint}/api/pemesanan/confirmation/${bookingId}`);
+      const response = await api.get(`/api/pemesanan/confirmation/${bookingId}`);
       setBooking(response.data);
       if (response.data.pesanan.status !== "Menunggu Pembayaran") {
         navigate(`/`);
@@ -115,21 +114,23 @@ function PaymentDetails() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function handlePayment() {
-    setIsLoading(true);
-    await axios.put(`${backendEndpoint}/api/pemesanan/confirmation/${bookingId}`);
-    setIsLoading(false);
-    navigate("/", alert("Pembayaran berhasil dilakukan."));
+    try {
+      await api.put(`/api/pemesanan/confirmation/${bookingId}`);
+      alert("Pembayaran berhasil dilakukan.");
+      navigate("/");
+    } catch (error) {
+      alert(errorMessage(error, "Pembayaran gagal, silakan coba lagi."));
+      setIsLoading(false);
+    }
   }
 
   const handleClick = () => {
+    if (isLoading) return;
     if (!saldoMencukupi) {
       return alert("Silahkan isi saldo terlebih dahulu.");
     }
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      handlePayment();
-    }, 2000);
+    handlePayment();
   };
 
   return (

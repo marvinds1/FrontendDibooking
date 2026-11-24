@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import './modalDetail.css';
-import axios from 'axios';
-import { backendEndpoint } from '../../../backend';
+import api, { errorMessage } from '../../../api';
 
 function MyVerticallyCenteredModal(props) {
   const [item, setItem] = useState({
@@ -15,7 +14,7 @@ function MyVerticallyCenteredModal(props) {
   });
 
   async function getData() {
-    const response = await axios.get(`${backendEndpoint}/api/lapangan/detail/${props.id}`);
+    const response = await api.get(`/api/lapangan/detail/${props.id}`);
     setItem({
       nama: response.data.name,
       kategori: response.data.kategori,
@@ -66,16 +65,15 @@ function MyVerticallyCenteredModal(props) {
     });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(item);
-    const response = axios.put(`${backendEndpoint}/api/lapangan/update/${props.id}`, item);
-    if (response){
+    try {
+      await api.put(`/api/lapangan/update/${props.id}`, item);
       alert("Lapangan berhasil diubah");
-    } else {
-      alert("Lapangan gagal diubah");
+      window.location.reload();
+    } catch (error) {
+      alert(errorMessage(error, "Lapangan gagal diubah"));
     }
-    window.location.reload();
   };
 
   return (

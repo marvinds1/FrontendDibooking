@@ -4,9 +4,8 @@ import DNavbar from "../../components/Navbar/navbar";
 import { Col, Container, Row, Card, Image, Button, Form, FloatingLabel } from "react-bootstrap";
 import TextInputWithFloatLabel from '../../components/TextInputWithFloatLabel/TextInputWithFloatLabel';
 import Footer from "../../components/Footer/footer";
-import axios from "axios";
+import api from '../../api';
 import locations from "../../components/Lokasi/data";
-import { backendEndpoint } from "../../backend";
 
 function AccountDetails() {
   const [dataPenyewa, setDataPenyewa] = useState({
@@ -23,7 +22,7 @@ function AccountDetails() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await axios.get(`${backendEndpoint}/api/detail/profile`, {
+      const response = await api.get(`/api/detail/profile`, {
         headers: {
           Authorization: loggedIn,
         },
@@ -47,7 +46,7 @@ function AccountDetails() {
       nomor_ponsel: dataPenyewa.nomor_ponsel,
       lokasi: dataPenyewa.lokasi
     }
-    const response = await axios.put(`${backendEndpoint}/api/detail/update`, data, {
+    const response = await api.put(`/api/detail/update`, data, {
       headers: {
         Authorization: `${loggedIn}`,
       },

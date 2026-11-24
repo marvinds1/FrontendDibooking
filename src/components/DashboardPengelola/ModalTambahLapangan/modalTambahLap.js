@@ -1,8 +1,7 @@
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import locations from '../../Lokasi/data';
-import axios from 'axios';
-import { backendEndpoint } from '../../../backend';
+import api from '../../../api';
 
 function ModalTambahLap(props) {
     const [form, setForm] = React.useState({
@@ -34,14 +33,11 @@ function ModalTambahLap(props) {
     };
 
     async function TambahLapangan() {
-        console.log(form);
-        await axios.post(`${backendEndpoint}/api/lapangan/add`, form)
+        await api.post(`/api/lapangan/add`, form)
         .then((response) => {
-            console.log(response);
             alert("Lapangan berhasil ditambahkan");
         })
         .catch((error) => {
-            console.log(error);
             alert("Lapangan gagal ditambahkan");
         });
     }

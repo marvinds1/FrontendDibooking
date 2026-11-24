@@ -5,9 +5,8 @@ import iconProfileBox from "../../assets/icons/ic_profile_box.png";
 import DNavbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from '../../api';
 import ModalTambahRev from "../../components/AddReview/addReview";
-import { backendEndpoint } from "../../backend";
 
 function History() {
   const [modalRev, setModalRev] = useState(false);
@@ -18,7 +17,7 @@ function History() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await axios.get(`${backendEndpoint}/api/pemesanan/pesanans`,
+      const response = await api.get(`/api/pemesanan/pesanans`,
         {
           headers: {
             Authorization: `${loggedIn}`,

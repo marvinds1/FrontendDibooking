@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Card, Image, Form, FloatingLabel, Button, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import TextInputWithFloatLabel from '../../components/TextInputWithFloatLabel/TextInputWithFloatLabel';
 import DAlert from '../../components/Alert';
 import logo from '../../assets/icons/logo.png';
 import ilustrations from '../../assets/images/ilustrations.png';
-import { backendEndpoint } from '../../backend';
 
 function Register() {
   const navigate = useNavigate();
@@ -98,11 +97,10 @@ function Register() {
       password: form.password,
       daftar_sebagai: form.daftar_sebagai,
     };
-    console.log(data);
     const isValid = validateForm();
     if (isValid) {
       setLoading(true);
-      axios.post(`${backendEndpoint}/api/user/register`, data)
+      api.post(`/api/user/register`, data)
         .then((response) => {
           setLoading(false);
           navigate('/login');

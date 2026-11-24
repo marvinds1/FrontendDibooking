@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
-import axios from 'axios';
-import { backendEndpoint } from '../../backend';
+import api from '../../api';
 
 function ModalTambahRev(props) {
     const [form, setForm] = React.useState({
@@ -17,14 +16,11 @@ function ModalTambahRev(props) {
     };
 
     async function TambahReview() {
-        console.log(form);
-        await axios.post(`${backendEndpoint}/api/review/add`, form)
+        await api.post(`/api/review/add`, form)
         .then((response) => {
-            console.log(response);
             alert("Review berhasil ditambahkan");
         })
         .catch((error) => {
-            console.log(error);
             alert("Review gagal ditambahkan");
         });
     }

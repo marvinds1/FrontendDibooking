@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react'
 import { Col, Container, Row, Card, Image, Button, Form, FloatingLabel } from "react-bootstrap";
 import TextInputWithFloatLabel from '../../components/DashboardPengelola/TextInputWithFloatLabel';
 import "../../pages/DashboardPengelola/dashboard.css"
-import axios from "axios";
+import api from '../../api';
 import { useNavigate } from "react-router-dom";
 import locations from '../../components/Lokasi/data';
-import { backendEndpoint } from '../../backend';
 
 function Detail() {
   const [dataPenyewa, setDataPenyewa] = useState({
@@ -22,7 +21,7 @@ function Detail() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await axios.get(`${backendEndpoint}/api/detail/profile`, {
+      const response = await api.get(`/api/detail/profile`, {
         headers: {
           Authorization: loggedIn,
         },
@@ -48,7 +47,7 @@ function Detail() {
       nomor_ponsel: dataPenyewa.nomor_ponsel,
       lokasi: dataPenyewa.lokasi
     }
-    const response = await axios.put(`${backendEndpoint}/api/detail/update`, data, {
+    const response = await api.put(`/api/detail/update`, data, {
       headers: {
         Authorization: `${loggedIn}`,
       },

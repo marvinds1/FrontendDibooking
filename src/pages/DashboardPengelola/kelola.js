@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import MyVerticallyCenteredModal from "../../components/DashboardPengelola/ModalDetail/modalDetail";
 import ModalTambahLap from "../../components/DashboardPengelola/ModalTambahLapangan/modalTambahLap";
 import "../../pages/DashboardPengelola/dashboard.css";
-import axios from "axios";
-import { backendEndpoint } from "../../backend";
+import api from '../../api';
 
 function Kelola() {
   const token = localStorage.getItem("token");
@@ -14,12 +13,11 @@ function Kelola() {
 
   useEffect(() => {
     async function fetchLapangan() {
-      const response = await axios.get(`${backendEndpoint}/api/lapangan/rekap`, {
+      const response = await api.get(`/api/lapangan/rekap`, {
         headers: {
           Authorization: `${token}`,
         },
       });
-      console.log(response.data);
       setData(response.data);
     }
     fetchLapangan();

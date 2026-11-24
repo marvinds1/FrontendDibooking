@@ -6,15 +6,14 @@ import iconProfileBox from "../../assets/icons/ic_profile_box.png";
 import DNavbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from '../../api';
 import { useNavigate } from "react-router-dom";
-import { backendEndpoint } from "../../backend";
 
 function Booking() {
   const navigate = useNavigate();
   const [Pemesanan, setPemesanan] = useState([]);
   async function fetchData(id) {
-    const response = await axios.get(`${backendEndpoint}/api/pemesanan/pesanans`,
+    const response = await api.get(`/api/pemesanan/pesanans`,
       {
         headers: {
           Authorization: `${id}`,
@@ -86,7 +85,7 @@ function Booking() {
     const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus pesanan?");
     if (confirmDelete) {
       async function fetchData() {
-        const response = await axios.put(`${backendEndpoint}/api/pemesanan/cancel/${id}`);
+        const response = await api.put(`/api/pemesanan/cancel/${id}`);
         if (response.status === 200) {
           window.location.reload();
         } else {

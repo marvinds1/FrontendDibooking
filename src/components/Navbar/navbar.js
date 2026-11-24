@@ -5,7 +5,7 @@ import { Navbar, Nav, Container, NavDropdown, Button, Image } from 'react-bootst
 import logo from '../../assets/icons/logo.png';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { backendEndpoint } from '../../backend';
+import api from '../../api';
 
 function DNavbar() {
   const images = require('../../assets/images/profile.jpeg')
@@ -55,13 +55,7 @@ function DNavbar() {
   });
 
   const fetchUser = async (token) => {
-    const response = await fetch(`${backendEndpoint}/api/detail/profile`, {
-      method: "GET",
-      headers: {
-        Authorization: `${token}`,
-      },
-    });
-    const data = await response.json();
+    const { data } = await api.get(`/api/detail/profile`);
     setUser({
       name: data.token.name,
       saldo: data.token.saldo,
