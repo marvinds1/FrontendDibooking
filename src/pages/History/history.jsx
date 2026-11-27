@@ -1,4 +1,4 @@
-/* eslint-disable array-callback-return */
+ 
 import React from "react";
 import { Container, Image, Form, Button } from "react-bootstrap";
 import iconProfileBox from "../../assets/icons/ic_profile_box.png";

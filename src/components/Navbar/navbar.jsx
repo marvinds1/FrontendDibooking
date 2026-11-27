@@ -1,5 +1,6 @@
-/* eslint-disable no-sequences */
-/* eslint-disable no-use-before-define */
+import profileImage from '../../assets/images/profile.jpeg';
+ 
+ 
 import React, { useState } from 'react';
 import { Navbar, Nav, Container, NavDropdown, Button, Image } from 'react-bootstrap';
 import logo from '../../assets/icons/logo.png';
@@ -8,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../api';
 
 function DNavbar() {
-  const images = require('../../assets/images/profile.jpeg')
   const [isOutlineButtonHovered, setOutlineButtonHovered] = useState(false);
   const [isFillButtonHovered, setFillButtonHovered] = useState(false);
 
@@ -54,7 +54,7 @@ function DNavbar() {
     saldo: "",
   });
 
-  const fetchUser = async (token) => {
+  const fetchUser = async () => {
     const { data } = await api.get(`/api/detail/profile`);
     setUser({
       name: data.token.name,
@@ -66,7 +66,7 @@ function DNavbar() {
     const token = localStorage.getItem("token");
     if (token) {
       setLoggedIn(true);
-      fetchUser(token);
+      fetchUser();
     }
   }, []);
 
@@ -110,7 +110,7 @@ function DNavbar() {
               title={
                 <span className="d-inline-flex align-items-center">
                   <span className="me-3">{user.name}</span>
-                  <Image src={images} height={"40px"} width={"40px"} roundedCircle />
+                  <Image src={profileImage} height={"40px"} width={"40px"} roundedCircle />
                 </span>
               }
             >

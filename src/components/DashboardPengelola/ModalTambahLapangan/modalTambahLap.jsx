@@ -34,10 +34,10 @@ function ModalTambahLap(props) {
 
     async function TambahLapangan() {
         await api.post(`/api/lapangan/add`, form)
-        .then((response) => {
+        .then(() => {
             alert("Lapangan berhasil ditambahkan");
         })
-        .catch((error) => {
+        .catch(() => {
             alert("Lapangan gagal ditambahkan");
         });
     }

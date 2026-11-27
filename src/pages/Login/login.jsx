@@ -8,7 +8,7 @@ import DAlert from '../../components/Alert';
 import logo from '../../assets/icons/logo.png';
 import ilustrations from '../../assets/images/ilustrations.png';
 
-function Register() {
+function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -18,11 +18,8 @@ function Register() {
   });
 
   const [form, setForm] = useState({
-    nama: "",
-    nomor_ponsel: "",
     email: "",
     password: "",
-    konfirmasi_password: "",
     daftar_sebagai: "",
   });
 
@@ -81,124 +78,84 @@ function Register() {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      name: form.nama,
-      nomor_ponsel: form.nomor_ponsel,
-      email: form.email,
-      password: form.password,
-      daftar_sebagai: form.daftar_sebagai,
-    };
-    const isValid = validateForm();
-    if (isValid) {
-      setLoading(true);
-      api.post(`/api/user/register`, data)
-        .then((response) => {
-          setLoading(false);
-          navigate('/login');
-          alert('Berhasil mendaftar');
-        })
-        .catch((error) => {
-          setLoading(false);
-          setAlert({
-            status: true,
-            message: "Server Internal Error.",
-            type: "danger",
-          });
-        });
+    if (!form.email) {
+      setAlert({
+        status: true,
+        message: "Email harus diisi",
+        type: "danger",
+      });
+      return;
     }
-  };
+    if (!form.password) {
+      setAlert({
+        status: true,
+        message: "Password harus diisi",
+        type: "danger",
+      });
+      return;
+    }
+    if (!form.daftar_sebagai) {
+      setAlert({
+        status: true,
+        message: "Pilih jenis masuk",
+        type: "danger",
+      });
+      return;
+    }
 
-  const validateForm = () => {
-    if (
-      form.nama.trim() === "" ||
-      form.nomor_ponsel.trim() === "" ||
-      form.email.trim() === "" ||
-      form.password.trim() === "" ||
-      form.konfirmasi_password.trim() === "" ||
-      form.daftar_sebagai.trim() === ""
-    ) {
-      setAlert({
-        status: true,
-        message: "Harap isi semua field.",
-        type: "danger",
+    setLoading(true);
+    api.post(`/api/user/login`, form)
+      .then((response) => {
+        setLoading(false);
+        localStorage.setItem("token", response.data.token);
+        if (form.daftar_sebagai === "Pemilik Lapangan") {
+          navigate("/dashboard");
+        }
+        else {
+          navigate("/");
+        }
+        alert("Login berhasil");
+      })
+      .catch(() => {
+        setLoading(false);
+        setAlert({
+          status: true,
+          message: "Login gagal. Periksa kembali email dan password Anda",
+          type: "danger",
+        });
       });
-      return false;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email)) {
-      setAlert({
-        status: true,
-        message: "Harap masukkan alamat Email yang valid.",
-        type: "danger",
-      });
-      return false;
-    }
-    if (form.password.length < 6) {
-      setAlert({
-        status: true,
-        message: "Password minimal 6 karakter.",
-        type: "danger",
-      });
-      return false;
-    }
-    if (form.password !== form.konfirmasi_password) {
-      setAlert({
-        status: true,
-        message: "Password dan Konfirmasi Password harus sama.",
-        type: "danger",
-      });
-      return false;
-    }
-    return true;
   };
 
   return (
     <div className="h-100">
-      <Row className="g-0">
+      <Row className="g-0" style={{ height: "100vh" }}>
         <Col lg="6" className="d-flex align-items-center">
           <Card.Body>
             <div className="text-center mt-5">
               <a href='/'>
                 <Image src={logo} alt="logo" style={{ width: "117px", height: "74px", objectFit: "cover", marginLeft: "45px" }}></Image>
               </a>
-              <Card.Title className="mt-1 mb-2">Daftar</Card.Title>
-              <Card.Text>Silahkan daftar akun terlebih dahulu</Card.Text>
+              <Card.Title className="mt-1 mb-2">Masuk</Card.Title>
+              <Card.Text>Silahkan masuk untuk lanjut ke website kami</Card.Text>
             </div>
             <Form className="py-5 px-4">
               {alert.status && (
                 <DAlert message={alert.message} type={alert.type} />
               )}
               <TextInputWithFloatLabel
-                label="Nama Lengkap"
-                name="nama"
-                value={form.nama}
-                type="text"
-                placeholder="Jhon Wick"
-                onChange={handleChange}
-              />
-              <TextInputWithFloatLabel
-                label="Nomor Ponsel"
-                name="nomor_ponsel"
-                value={form.nomor_ponsel}
-                type="number"
-                placeholder="081234567890"
-                onChange={handleChange}
-              />
-              <TextInputWithFloatLabel
                 label="Email"
                 name="email"
                 value={form.email}
-                type='email'
-                placeholder='name@example.com'
+                type="email"
+                placeholder="name@example.com"
                 onChange={handleChange}
               />
               <TextInputWithFloatLabel
@@ -209,18 +166,10 @@ function Register() {
                 placeholder="Password"
                 onChange={handleChange}
               />
-              <TextInputWithFloatLabel
-                label="Konfirmasi Password"
-                name="konfirmasi_password"
-                value={form.konfirmasi_password}
-                type="password"
-                placeholder="Password Confirmation"
-                onChange={handleChange}
-              />
               <FloatingLabel
                 size="sm"
                 controlId="floatingSelect"
-                label="Daftar Sebagai"
+                label="Masuk Sebagai"
                 className="mb-3"
               >
                 <Form.Select
@@ -234,9 +183,14 @@ function Register() {
                   <option value="Penyewa">Penyewa</option>
                 </Form.Select>
               </FloatingLabel>
-              <div className="text-muted mb-4">
-                Sudah punya akun? <a href="/login" style={{ fontWeight: "bold", textDecoration: "none" }}>Masuk</a>
-              </div>
+              <Row className="mb-4">
+                <Col className="text-muted">
+                  Belum punya akun? <a href="register" style={{ fontWeight: "bold", textDecoration: "none" }}>Daftar</a>
+                </Col>
+                <Col className="d-flex justify-content-end">
+                  <a href="/reset" style={{ fontWeight: "bold", textDecoration: "none" }}>Lupa Password?</a>
+                </Col>
+              </Row>
               <Button
                 style={isFillButtonHovered ? buttonFillHover : buttonFill}
                 disabled={loading}
@@ -249,7 +203,7 @@ function Register() {
                     <Spinner animation="border" size="sm" className="mr-4" /> Loading...
                   </>
                 ) : (
-                  'Daftar'
+                  'Masuk'
                 )}
               </Button>
               <hr className="my-3" />
@@ -258,7 +212,7 @@ function Register() {
                 onMouseLeave={() => setOutlineButtonHovered(false)}
               >
                 <FcGoogle className="me-2 mb-1" style={{ width: "25px", height: "25px" }} />
-                Daftar dengan Google
+                Masuk dengan Google
               </Button>
             </Form>
           </Card.Body>
@@ -271,4 +225,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

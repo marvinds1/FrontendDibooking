@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+ 
 import { useState, useEffect } from "react";
 import DNavbar from "../../components/Navbar/navbar";
 import { Col, Container, Row, Card, Image, Button, Form, FloatingLabel } from "react-bootstrap";

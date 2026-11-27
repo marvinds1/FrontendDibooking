@@ -91,7 +91,7 @@ function FieldDetails() {
 
   const handleClick = () => {
     setIsLoading(true);
-    async function fetchData(userId, cost) {
+    async function fetchData() {
       try {
         const resp = await api.post(`/api/pemesanan/add`, {
           idField: Number(fieldId),
@@ -108,14 +108,8 @@ function FieldDetails() {
     async function cekLogin() {
       const loggedIn = localStorage.getItem("token");
       if (loggedIn) {
-        const response = await api.get(`/api/user/profile`, {
-          headers: {
-            Authorization: `${loggedIn}`,
-          },
-        });
-        const userId = response.data.token.id;
-        const cost = response.data.token.saldo;
-        fetchData(userId, cost);
+        await api.get(`/api/user/profile`);
+        fetchData();
       }
       else {
         alert("Anda harus login terlebih dahulu!");

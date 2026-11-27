@@ -1,3 +1,4 @@
+import lapanganImg from '../../assets/images/lapangan.jpeg';
 import React from "react";
 import { Container, Card, Row, Col, Image, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -31,7 +32,7 @@ function HomePage() {
         location: product.location,
         rating: product.rating,
         rented: product.rented,
-        imageSrc: require('../../assets/images/lapangan.jpeg'),
+        imageSrc: lapanganImg,
       }));
       setAllProducts(Items);
       const recommendations = Items.slice(0, 10);

@@ -45,7 +45,7 @@ api.interceptors.response.use(
         const token = await refreshAccessToken();
         original.headers.Authorization = `Bearer ${token}`;
         return api(original);
-      } catch (refreshError) {
+      } catch {
         localStorage.removeItem(TOKEN_KEY);
       }
     }

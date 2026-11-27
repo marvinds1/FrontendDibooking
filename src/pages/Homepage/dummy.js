@@ -1,3 +1,10 @@
+import icSoccerBallImg from '../../assets/icons/ic_soccer_ball.png';
+import icFootballImg from '../../assets/icons/ic_football.png';
+import icBadmintonImg from '../../assets/icons/ic_badminton.png';
+import icBasketballImg from '../../assets/icons/ic_basketball.png';
+import icVolleyballImg from '../../assets/icons/ic_volleyball.png';
+import icBilliardsImg from '../../assets/icons/ic_billiards.png';
+import lapanganImage from '../../assets/images/lapangan.jpeg';
 const carouselItems = [
     {
       id: 1,
@@ -7,7 +14,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 2,
@@ -17,7 +24,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 3,
@@ -27,7 +34,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 4,
@@ -37,7 +44,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 5,
@@ -47,43 +54,43 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
   ];
 
   const images = [
     {
-      src: require('../../assets/icons/ic_soccer_ball.png'),
+      src: icSoccerBallImg,
       alt: 'Soccer Ball',
       link: '/futsal',
       title: 'Futsal'
     },
     {
-      src: require('../../assets/icons/ic_football.png'),
+      src: icFootballImg,
       alt: 'Football',
       link: '/sepak-bola',
       title: 'Sepak Bola'
     },
     {
-      src: require('../../assets/icons/ic_badminton.png'),
+      src: icBadmintonImg,
       alt: 'Badminton',
       link: '/bulu-tangkis',
       title: 'Bulu Tangkis'
     },
     {
-      src: require('../../assets/icons/ic_basketball.png'),
+      src: icBasketballImg,
       alt: 'Basketball',
       link: '/bola-basket',
       title: 'Basket'
     },
     {
-      src: require('../../assets/icons/ic_volleyball.png'),
+      src: icVolleyballImg,
       alt: 'Volleyball',
       link: '/bola-voli',
       title: 'Voli'
     },
     {
-      src: require('../../assets/icons/ic_billiards.png'),
+      src: icBilliardsImg,
       alt: 'Billiards',
       link: '/billiard',
       title: 'Billiard'
@@ -99,7 +106,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 2,
@@ -109,7 +116,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 3,
@@ -119,7 +126,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 4,
@@ -129,7 +136,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 5,
@@ -139,7 +146,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 6,
@@ -149,7 +156,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 7,
@@ -159,7 +166,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     },
     {
       id: 8,
@@ -169,7 +176,7 @@ const carouselItems = [
       location: 'Kota Semarang',
       rating: '4.8',
       rented: '27',
-      imageSrc: require('../../assets/images/lapangan.jpeg')
+      imageSrc: lapanganImage
     }
   ];
 

@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+ 
 import { useState, useEffect } from 'react';
 import "../../pages/DashboardPengelola/dashboard.css";
 import api, { errorMessage } from '../../api';
 
 
-function Konfirmasi({id}) {
+function Konfirmasi() {
     const [pesan, setPesan] = useState([]);
     const fetchPesan = async () => {
         const response = await api.get(`/api/pemesanan/rekap`);

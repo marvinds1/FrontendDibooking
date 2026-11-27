@@ -6,7 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
-const Rating = ({reviews, rating5, rating4, rating3, rating2, rating1, rating0}) => {
+const Rating = ({rating5, rating4, rating3, rating2, rating1, rating0}) => {
   const comments = [
     {
       id: 1,

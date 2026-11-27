@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+ 
 import Detail from "./detail";
 import Kelola from "./kelola";
 import Konfirmasi from "./konfirmasi";

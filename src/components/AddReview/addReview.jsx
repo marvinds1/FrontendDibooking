@@ -17,10 +17,10 @@ function ModalTambahRev(props) {
 
     async function TambahReview() {
         await api.post(`/api/review/add`, form)
-        .then((response) => {
+        .then(() => {
             alert("Review berhasil ditambahkan");
         })
-        .catch((error) => {
+        .catch(() => {
             alert("Review gagal ditambahkan");
         });
     }

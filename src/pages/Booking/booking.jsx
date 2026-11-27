@@ -1,4 +1,4 @@
-/* eslint-disable array-callback-return */
+ 
 import React from "react";
 import { Container, Image } from "react-bootstrap";
 import { BiMessageDetail } from "react-icons/bi";
