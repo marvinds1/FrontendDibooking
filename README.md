@@ -4,7 +4,7 @@ React client for **Dibooking**, a sports-field booking app. Renters browse field
 
 ## Stack
 
-React 18 (Create React App), React Router 6, React Bootstrap, Axios. Owner dashboard is based on the SB Admin 2 template.
+React 19, Vite 8, Vitest 5, React Router 7, React Bootstrap 2, Axios, Bootstrap 5, moment. Owner dashboard is based on the SB Admin 2 template.
 
 ## Features
 
@@ -18,7 +18,7 @@ React 18 (Create React App), React Router 6, React Bootstrap, Axios. Owner dashb
 
 All requests go through one Axios instance (`src/api.js`):
 
-- `baseURL` from `REACT_APP_API_URL` (falls back to the deployed backend).
+- `baseURL` from `VITE_API_URL` (falls back to the deployed backend).
 - Adds `Authorization: Bearer <access token>` to every request.
 - On `401` it refreshes the access token **once** via the httpOnly refresh cookie and retries the request. Concurrent `401`s share a single in-flight refresh promise — firing several refreshes in parallel would trip the backend's refresh-token reuse detection and log the user out.
 - `errorMessage()` surfaces the server's message (e.g. *"Slot sudah dibooking"*, *"Saldo tidak mencukupi"*) instead of a generic failure.
@@ -32,9 +32,19 @@ All requests go through one Axios instance (`src/api.js`):
 
 ## Running locally
 
+Requires a recent Node.js (the toolchain is Vite 8 / Vitest 5) and a running [backend-dibooking](https://github.com/marvinds1/backend-dibooking).
+
 ```bash
-cp .env.example .env      # point REACT_APP_API_URL to your backend
 npm ci
-npm start                 # http://localhost:3000
-CI=true npm run build     # production build, warnings fail the build
+echo "VITE_API_URL=http://localhost:8000" > .env   # optional; defaults to the deployed backend
+npm run dev               # http://127.0.0.1:3000
 ```
+
+```bash
+npm run build             # production build into build/
+npm run preview           # serve the production build
+npm test                  # Vitest (API client + App tests)
+npm run lint
+```
+
+Routes (client side): `/`, `/about`, `/register`, `/login`, `/detail/:id`, `/payment/:id`, `/payment/confirmation`, `/user`, `/booking`, `/history`, `/dashboard`. `vercel.json` rewrites all paths to `index.html`.
