@@ -2,6 +2,7 @@ import axios from 'axios';
 import { backendEndpoint } from './backend';
 
 const TOKEN_KEY = 'token';
+const AUTH_CALL = /^\/api\/user\/(login|register|token|logout)$/;
 
 const api = axios.create({
   baseURL: backendEndpoint,
@@ -38,7 +39,7 @@ api.interceptors.response.use(
   (res) => res,
   async (error) => {
     const original = error.config;
-    const isAuthCall = original && original.url && original.url.startsWith('/api/user/');
+    const isAuthCall = original && original.url && AUTH_CALL.test(original.url);
     if (error.response && error.response.status === 401 && !original._retry && !isAuthCall) {
       original._retry = true;
       try {
@@ -52,6 +53,16 @@ api.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export async function logout() {
+  try {
+    await api.delete('/api/user/logout');
+  } catch {
+    // still clear the local token if the server is unreachable
+  } finally {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+}
 
 export const errorMessage = (error, fallback) => (
   (error && error.response && error.response.data && error.response.data.message) || fallback

@@ -1,12 +1,11 @@
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import locations from '../../Lokasi/data';
-import api from '../../../api';
+import api, { errorMessage } from '../../../api';
 
 function ModalTambahLap(props) {
     const [form, setForm] = React.useState({
         title: "",
-        token: localStorage.getItem("token"),
         typeField: "",
         imageSrc: "../../assets/images/lapangan.jpeg",
         location: "",
@@ -37,8 +36,8 @@ function ModalTambahLap(props) {
         .then(() => {
             alert("Lapangan berhasil ditambahkan");
         })
-        .catch(() => {
-            alert("Lapangan gagal ditambahkan");
+        .catch((error) => {
+            alert(errorMessage(error, "Lapangan gagal ditambahkan"));
         });
     }
     

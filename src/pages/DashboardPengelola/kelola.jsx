@@ -13,11 +13,7 @@ function Kelola() {
 
   useEffect(() => {
     async function fetchLapangan() {
-      const response = await api.get(`/api/lapangan/rekap`, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
+      const response = await api.get(`/api/lapangan/rekap`);
       setData(response.data);
     }
     fetchLapangan();

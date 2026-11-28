@@ -6,7 +6,7 @@ import { Navbar, Nav, Container, NavDropdown, Button, Image } from 'react-bootst
 import logo from '../../assets/icons/logo.png';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../api';
+import api, { logout as apiLogout } from '../../api';
 
 function DNavbar() {
   const [isOutlineButtonHovered, setOutlineButtonHovered] = useState(false);
@@ -71,8 +71,8 @@ function DNavbar() {
   }, []);
 
   const navigate = useNavigate();
-  const logout = () => {
-    localStorage.removeItem("token");
+  const logout = async () => {
+    await apiLogout();
     setLoggedIn(false);
     navigate("/");
   };

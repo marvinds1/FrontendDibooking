@@ -68,7 +68,7 @@ function PaymentDetails() {
     peringatan: "Mohon selesaikan pembayaran secepatnya."
   };
 
-  const saldoMencukupi = dataPembayaran.saldo >= 2*booking.lapangan.price;
+  const saldoMencukupi = dataPembayaran.saldo >= Number(booking.pesanan.total);
 
   const [isOutlineButtonHovered, setOutlineButtonHovered] = useState(false);
   const [isFillButtonHovered, setFillButtonHovered] = useState(false);

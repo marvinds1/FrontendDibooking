@@ -21,11 +21,7 @@ function Detail() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await api.get(`/api/detail/profile`, {
-        headers: {
-          Authorization: loggedIn,
-        },
-      });
+      const response = await api.get(`/api/detail/profile`);
       setDataPenyewa({
         id: response.data.token.id,
         imageSrc: "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp",
@@ -40,18 +36,13 @@ function Detail() {
   }, []);
   const navigate = useNavigate();
   const updateProfile = async () => {
-    const loggedIn = localStorage.getItem("token");
     const data = {
       name: dataPenyewa.name,
       email: dataPenyewa.email,
       nomor_ponsel: dataPenyewa.nomor_ponsel,
       lokasi: dataPenyewa.lokasi
     }
-    const response = await api.put(`/api/detail/update`, data, {
-      headers: {
-        Authorization: `${loggedIn}`,
-      },
-    });
+    const response = await api.put(`/api/detail/update`, data);
     if (response.status === 200) {
       navigate("/dashboard")
       alert("Berhasil mengubah data");

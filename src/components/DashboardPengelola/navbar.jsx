@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from "react-router-dom";
+import { logout as apiLogout } from "../../api";
 
 function Navbar({user}) {
     const navigate = useNavigate();
@@ -14,9 +15,9 @@ function Navbar({user}) {
             setStyle("navbar-nav dibooking-orange sidebar sidebar-dark accordion");
         }
     }
-    const logout = () => {
+    const logout = async () => {
+        await apiLogout();
         navigate("/login");
-        localStorage.removeItem("token");
     };
     const name = user;
     return (

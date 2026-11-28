@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import api, { errorMessage } from './api';
+import api, { errorMessage, logout } from './api';
 
 const originalAdapter = api.defaults.adapter;
 
@@ -61,6 +61,26 @@ describe('api client', () => {
     api.defaults.adapter = (config) => reply(config, 401);
     await expect(api.post('/api/user/login', {})).rejects.toBeTruthy();
     expect(refresh).not.toHaveBeenCalled();
+  });
+
+  it('refreshes on /api/user/profile, which is not an auth endpoint', async () => {
+    localStorage.setItem('token', 'expired');
+    const refresh = vi.spyOn(axios, 'post').mockResolvedValue({ data: { token: 'fresh' } });
+    api.defaults.adapter = (config) => (
+      config.headers.Authorization === 'Bearer fresh' ? reply(config, 200, { ok: true }) : reply(config, 401)
+    );
+    const res = await api.get('/api/user/profile');
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(res.data.ok).toBe(true);
+  });
+
+  it('logout revokes the session on the server and clears the token, even if the call fails', async () => {
+    localStorage.setItem('token', 'abc');
+    let seen;
+    api.defaults.adapter = (config) => { seen = `${config.method} ${config.url}`; return reply(config, 500); };
+    await logout();
+    expect(seen).toBe('delete /api/user/logout');
+    expect(localStorage.getItem('token')).toBeNull();
   });
 
   it('extracts the server message for the UI', () => {

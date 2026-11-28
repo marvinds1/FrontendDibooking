@@ -17,13 +17,7 @@ function History() {
       window.location.href = "/login";
     }
     async function fetchData() {
-      const response = await api.get(`/api/pemesanan/pesanans`,
-        {
-          headers: {
-            Authorization: `${loggedIn}`,
-          },
-        }
-      );
+      const response = await api.get(`/api/pemesanan/pesanans`);
       response.data = response.data.filter((data) => data.status === 'Selesai' || data.status === 'Dibatalkan');
       setPemesanan(response.data);
     }

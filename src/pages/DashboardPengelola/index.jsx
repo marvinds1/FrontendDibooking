@@ -6,7 +6,7 @@ import Navbar from '../../components/DashboardPengelola/navbar';
 import Footer from '../../components/DashboardPengelola/footer';
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from '../../api';
+import api, { logout as apiLogout } from '../../api';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -57,10 +57,11 @@ function Dashboard() {
     
     useEffect(() => {
         fetchUser();
-    });
+    }, []);
     
-    const logout = () => {
-        localStorage.removeItem("token");
+    const logout = async () => {
+        await apiLogout();
+        navigate("/login");
     };
 
     return (
